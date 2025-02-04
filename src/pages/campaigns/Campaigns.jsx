@@ -22,7 +22,7 @@ const Campaigns = () => {
     const [activeTab, setActiveTab] = useState(0);
     const [openMenu, setOpenMenu] = useState(false)
     const {getAllUser, totalPages, userData, loading, getAllUsers, currentPage, itemsPerPage, setPage} = useUserStore()
-    const {getAllCampaigns, campaignData} = UseCampaignStore()
+    const {getAllCampaigns, campaignData, deleteCampaign} = UseCampaignStore()
 
     //console.log("SET PAGES", setPage)
 
@@ -36,95 +36,15 @@ const Campaigns = () => {
       getAllCampaigns()
     },[])
 
+    const handleDeleteCampaign = async (id) => {
+     await deleteCampaign({id: id})
+     getAllCampaigns()
+    }
+
     console.log("USERS INFORMATION", campaignData)
 
   const columns = ['Image', 'Title & Date Created', 'Fundraising for', 'Amount', 'Location', 'Status',   'Actions'];
- const data = [
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'John Doe',
-      age: 28,
-      email: 'john@example.com',
-      status: 'active',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'Jane Smith',
-      age: 34,
-      email: 'jane@example.com',
-      status: 'active',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'Mike Johnson',
-      age: 45,
-      email: 'mike@example.com',
-      status: 'active',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'John Doe',
-      age: 28,
-      email: 'john@example.com',
-      status: 'active',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'Jane Smith',
-      age: 34,
-      email: 'jane@example.com',
-      status: 'active',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'Mike Johnson',
-      age: 45,
-      email: 'mike@example.com',
-      status: 'active',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'John Doe',
-      age: 28,
-      email: 'john@example.com',
-      status: 'active',
-    },
-    {
-      profile: '/assets/png/avatar2.png',
-      name: 'Jane Smith',
-      age: 34,
-      email: 'jane@example.com',
-      status: 'inactive',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'Mike Johnson',
-      age: 45,
-      email: 'mike@example.com',
-      status: 'active',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'John Doe',
-      age: 28,
-      email: 'john@example.com',
-      status: 'active',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'Jane Smith',
-      age: 34,
-      email: 'jane@example.com',
-      status: 'inactive',
-    },
-    {
-      profile: 'https://via.placeholder.com/40',
-      name: 'Mike Johnson',
-      age: 45,
-      email: 'mike@example.com',
-      status: 'active',
-    },
-  ];
+
 
    const renderRow = (item) => (
     <>
@@ -148,7 +68,7 @@ const Campaigns = () => {
 
         }><MdOutlineRemoveRedEye className='text-gray-500' size={22} /></Link>
       {/* <buttonLink className="bg-red-500 text-white px-2 py-1 rounded">Delete</buttonLink> */}
-      {/* <span><MdOutlineDelete className='text-red-500' size={22} /></span> */} 
+      <span className='cursor-pointer'><MdOutlineDelete className='text-red-500' size={22} onClick={()=> handleDeleteCampaign(item?._id)}/></span> 
        
       </div>
       </td>
@@ -156,12 +76,12 @@ const Campaigns = () => {
     </>
   ); 
 
-  const uniqueStatuses = [...new Set(data.map(item => item.status))];
-  const filteredData = activeTab === 0 ? data : data.filter(item => item.status === customTabs[activeTab]);
+  const uniqueStatuses = [...new Set(campaignData?.map(item => item.status))];
+  const filteredData = activeTab === 0 ? campaignData : campaignData?.filter(item => item?.status === customTabs[activeTab]);
   return (
     <>
     
-     {loading === true ? <LoadingSpinner /> : <>
+     
       <div className='p-5'>
       <AdminHeader
       title="Campaigns" 
@@ -195,7 +115,7 @@ const Campaigns = () => {
             />  */}
             </div>
     </div>
-     </>}
+    
      <SideMenuSheet
       open={openMenu}
       setOpen={()=>setOpenMenu(false)}
