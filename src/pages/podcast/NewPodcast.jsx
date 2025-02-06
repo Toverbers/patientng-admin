@@ -100,7 +100,7 @@ const NewPodcast = () => {
           <InputField title="Source" placeholder="Enter source eg. Youtube" value={source} onChange={(e) => setSource( e.target.value )} />
           <InputField title="Source Link" placeholder="Enter source Link eg. https:youtube.com" value={link} onChange={(e) => setLink( e.target.value)} />
           </div>
-          <pre>{JSON.stringify(sourceData, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(sourceData, null, 2)}</pre> */}
           
 
           <div className='flex space-x-3 items-center'>

@@ -78,7 +78,7 @@ const Login = () => {
 
 
           <PasswordInputField
-            label="Password"
+            title="Password"
             id="newPassword"
             placeholder="password"
             value={password}

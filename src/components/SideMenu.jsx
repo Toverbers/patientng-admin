@@ -102,10 +102,11 @@ const SideMenu = () => {
         <Link to="/" className="flex items-center">
          <img
           src="/assets/svg/logo.svg"
+          //src="/fav-logo.png"
           alt="logo"
-          className="w-4 h-4 md:w-7 md:h-7"
+          className="w-6 h-6 md:w-10 md:h-10 rounded-lg"
         />
-        <h1 className="md:text-2xl font-bold ml-2 text-[#004146]">Patient.ng</h1>
+        <h1 className="md:text-2xl font-bold ml-2 text-emerald-500">Patient.ng</h1>
         </Link>
       </div>
       
