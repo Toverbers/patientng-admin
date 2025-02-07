@@ -19,20 +19,20 @@ const Pages = () => {
 
   return (
     <div className='mt-5 pb-20'>
-      <div className='flex flex-col space-y-3'>
+      <div className='flex flex-col space-y-3 '>
       <ButtonComponent
         onClick={handlePages}
         title="Publish"
         buttonStyle="w-auto px-10" 
         />
-      <div className='space-y-2 mb-20 box-border overflow-auto'>
+      <div className='space-y-2 mb-30 box-border overflow-auto'>
         <h3 className='text-3xl font-medium'>About</h3>
         <TextEditor
               value={about}
               onChange={setAbout}
             />
         </div>
-      <div className='space-y-2 mt-10 mb-20 box-border overflow-auto'>
+      <div className='space-y-2 my-20 box-border overflow-auto'>
         <h3 className='text-3xl font-medium'>Contact</h3>
         <TextEditor
               value={contact}

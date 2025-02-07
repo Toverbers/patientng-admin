@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 //import { HomeIcon, UserIcon, CogIcon } from '@heroicons/react/outline';
 import { FaTv } from "react-icons/fa6";
@@ -14,13 +14,20 @@ import RaffleIcon from './icons/RaffleIcon';
 import GameIcon from './icons/GameIcon';
 import BottomAction from './dashboard/BottomAction';
 import SettingIcon from './icons/SettingIcon';
-import { AlignRightIcon, ArrowDownIcon, ArrowRight, BookAIcon, MoveDown, Settings } from 'lucide-react';
+import { AlignRightIcon, ArrowDownIcon, ArrowRight, BookAIcon, FlagIcon, HeartIcon, MoveDown, RadioIcon, Settings } from 'lucide-react';
 import { DropdownMenuIcon } from '@radix-ui/react-icons';
 import { MdArrowDropDown } from 'react-icons/md';
+import { hasPermission } from '@/utils/roleAuthorization';
+import useAuthStore from '@/store/authStore';
 
 
 const MobileMenu = () => {
   const [dropdownOpen, setDropdownOpen] = useState()
+  const {getMe, myData} = useAuthStore()
+
+  useEffect(()=>{
+    getMe()
+  },[])
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -74,7 +81,7 @@ const MobileMenu = () => {
       
       <nav className=" mt-7">
       <ul className="flex flex-col">
-        {menuItems.map((item) => (
+        {/* {menuItems.map((item) => (
           <li key={item.name} className="text-gray-500 hover:border hover:border-l-lime-600 hover:border-l-2 hover:bg-[#F2F6F7] p-3 px-5">
             <Link to={item.path} className="flex items-center space-x-2">
               {item.icon}
@@ -82,11 +89,107 @@ const MobileMenu = () => {
             </Link>
           </li>
           
-        ))}
+        ))} */}
 
 
-          <p className='px-5 text-base font-bold'>Admins</p>
+         <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/" className="flex items-center space-x-2">
+            <DashboardIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span >Dashboard</span>
+            </Link>
+          </li>
+          {/* )} */}
+        
+          {hasPermission(myData?.userType, ["admin", "user", ]) && (
+        <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/users" className="flex items-center space-x-2">
+            <UserIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span>Users</span>
+            </Link>
+          </li>
+           )}
+          
+
+        {/* {hasPermission(adminData?.permissions, ["create_user", "read_user", "update_user","delete_user", "all"]) && (
+        <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/users" className="flex items-center space-x-2">
+            <UserIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span>Users</span>
+            </Link>
+          </li>
+          )} */}
+        
+        {hasPermission(myData?.userType, ["admin", "crowedfunding", ]) && (
+        <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/campaigns" className="flex items-center space-x-2">
+            <HeartIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span>Campaigns</span>
+            </Link>
+          </li>
+        )}
+          
+          {hasPermission(myData?.userType, ["admin", "advocacy", ]) && (
+        <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/advocacy" className="flex items-center space-x-2">
+            <FlagIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span>Advocacy</span>
+            </Link>
+          </li>
+          )}
+        
+        
+        {/* <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/health-facilities" className="flex items-center space-x-2">
+            <HealthFacilityIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span >Health Facility</span>
+            </Link>
+          </li> */}
+         
+        
+        
+        <p className='px-5 text-base font-bold mt-5'>Resources</p>
+        
+        {hasPermission(myData?.userType, ["admin", "blogger", ]) && (
+        <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/blogs" className="flex items-center space-x-2">
+            <LearningHubIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span >Blogs</span>
+            </Link>
+          </li>
+        )}
+          
+        
+          {hasPermission(myData?.userType, ["admin", "podcast", ]) && (
+        <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/podcasts" className="flex items-center space-x-2">
+            <RadioIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span >Podcasts</span>
+            </Link>
+          </li>
+          )}
+          
+        
+        {/* {hasPermission(adminData?.permissions, ["create_newsletter", "read_newsletter", "update_newsletter","delete_newsletter", "all", "create_dashboard"]) && (
+        <li className="text-gray-500 hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
+            <Link to="/newsletter" className="flex items-center space-x-2">
+            <BookAIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span >Newsletter</span>
+            </Link>
+          </li>
+          )} */}
+        
+        {hasPermission(myData?.userType, ["admin", ]) && (
         <li className="text-gray-500 hover:border hover:border-l-lime-600 hover:border-l-2 hover:bg-[#F2F6F7] p-3 px-5">
+            <Link to="/settings" className="flex items-center space-x-2">
+            <Settings className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
+              <span >Website Settngs</span>
+            </Link>
+          </li>
+        )}
+          
+          <p className='px-5 text-base font-bold mt-5'>Admins</p>
+        
+        <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
             <Link to='/admins' className="flex items-center space-x-2">
             <SettingIcon
               className="w-6 h-6 md:w-6 md:h-6"
@@ -94,12 +197,13 @@ const MobileMenu = () => {
             />
               <span >Admin & Roles</span>
             </Link>
-          </li>
+        </li>
       </ul>
+
     </nav>
       </div>
 
-    <BottomAction />
+    <BottomAction data={myData} />
     </div>
     </>
   )

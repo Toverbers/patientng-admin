@@ -10,7 +10,7 @@ const AdminHeader = ({title, content, hasBackButton}) => {
      <div className="flex flex-col space-y-2 md:flex-row md:space-x-4 md:items-center my-5">
       <div className="flex-1 flex space-x-4 items-center">
         {hasBackButton && (<BackButton />)}
-        <span className='md:hidden cursor-pointer' onClick={()=>setOpenMenu(true)}><HamburgerMenuIcon className='w-[25px] h-[25px]' /></span>
+        <span className='md:hidden cursor-pointer' onClick={()=>setOpenMenu(true)}><HamburgerMenuIcon className='w-[22px] h-[22px]' /></span>
         <p className="text-[#252525] text-[28px] font-semibold">{title}</p>
       </div>
 
