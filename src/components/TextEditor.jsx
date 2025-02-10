@@ -64,7 +64,7 @@ const TextEditor = ({value, onChange}) => {
     <ReactQuill theme="snow"
         modules={modules}
         formats={formats}
-        value={value} onChange={onChange}  className='min-h-[300px] bg-white mb-20 overflow-auto'/>
+        value={value} onChange={onChange}  className=' bg-white  overflow-auto'/>
   )
 }
 

@@ -71,7 +71,7 @@ const PendingCampaigns = () => {
   ); 
 
   //const uniqueStatuses = [...new Set(data.map(item => item.status))];
-  const filteredData = activeTab === 0 ? campaignData : campaignData.filter(item => item.status === 'pending');
+  const filteredData = campaignData.filter(item => item.status === 'pending');
   const sliceData = filteredData?.slice(0,9)
   return (
     <>

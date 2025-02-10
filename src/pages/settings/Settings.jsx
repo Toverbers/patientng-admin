@@ -32,7 +32,7 @@ const Settings = () => {
             <TabsTrigger value="password">Password</TabsTrigger> */}
        {/*  <TabsTrigger value="faq">FAQ</TabsTrigger>  */} 
         <TabsTrigger value="pages">Pages</TabsTrigger>  
-        <TabsTrigger value="terms">Terms & Condition</TabsTrigger> 
+        <TabsTrigger value="terms">Terms & Conditions</TabsTrigger> 
         </TabsList>
         {/* <TabsContent value="faq"><Faq /></TabsContent> */}
         <TabsContent value="pages"><Pages /></TabsContent>

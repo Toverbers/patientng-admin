@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 const SingleAdvocacy = () => {
-  const {getAdvocacy, singleAdvocacy} = UseAdvocacyStore()
+  const {getAdvocacy, singleAdvocacy, toggleAdvocacyStatus} = UseAdvocacyStore()
   const {id} = useParams()
 
   useEffect(() =>{
@@ -14,7 +14,8 @@ const SingleAdvocacy = () => {
   },[])
 
   const handleStatusUpdate = async () =>{
-
+   await toggleAdvocacyStatus({id: id})
+   getAdvocacy({id:id})
   }
 
   console.log("SINGLE ADVOCACY DETAILS", singleAdvocacy)
@@ -34,15 +35,15 @@ const SingleAdvocacy = () => {
         </div>
 
         <div className='max-w-2xl border border-gray-100 p-5 bg-white rounded-lg shadow-lg'>
-        {/* <div className="md:flex items-center md:space-x-3 mt-3 md:mt-0 space-y-2 md:space-y-0">
+        <div className="md:flex items-center md:space-x-3 mt-3 md:mt-0 space-y-2 md:space-y-0">
 
             <ButtonComponent
-              title="set progress"
+              title="Update Status"
               //icon="/assets/svg/plus_white.svg"
-              buttonStyle="min-w-[150px] h-10 md:max-w-[180px] text-sm text-emerald-600 bg-transparent hover:bg-emerald-600 border border-emerald-500"
+              buttonStyle="min-w-[150px] h-10 md:max-w-[180px] text-sm text-white bg-emerald-500 hover:bg-emerald-600 border border-emerald-500"
               onClick={handleStatusUpdate}
             />
-            </div> */}
+            </div> 
           <div className='py-3 flex items-center justify-between'>
             <div>
             <h2 className='font-medium text-2xl'>{singleAdvocacy?.user?.firstName} {singleAdvocacy?.user?.lastName}</h2>

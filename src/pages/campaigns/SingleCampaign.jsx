@@ -58,12 +58,12 @@ const SingleCampaign = () => {
           } */}
           
           {singleCampaign?.status === 'pending' &&
-           <ButtonComponent title="Activate user" 
+           <ButtonComponent title="Approve Campaign" 
            onClick={handleActivateCampaign} 
            buttonStyle="bg-emerald-500" />
           }
           {singleCampaign?.status === 'inactive' &&
-           <ButtonComponent title="Activate user" 
+           <ButtonComponent title="Approve Campaign" 
            onClick={handleActivateCampaign} 
            buttonStyle="bg-emerald-500" />
           }
@@ -140,7 +140,7 @@ const SingleCampaign = () => {
         </div>
         <div className="flex items-center gap-2 text-sm text-gray-500">
         <Calendar className="h-4 w-4 mr-2" color='#10b981' />
-        {moment(singleCampaign?.createdAt).format('DD MMMM YYYY')} Likes
+        {moment(singleCampaign?.createdAt).format('DD MMMM YYYY')}
         </div>
 
         <div className="space-y-2">

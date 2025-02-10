@@ -19,7 +19,7 @@ const Terms = () => {
         buttonStyle="w-auto px-10" 
         />
       <div className='space-y-2 mb-20 box-border overflow-auto'>
-        <h3 className='text-3xl font-medium'>Terms and Condition</h3>
+        <h3 className='text-3xl font-medium my-5'>Terms and Conditions</h3>
         <TextEditor
               value={terms}
               onChange={setTerms}

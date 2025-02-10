@@ -60,7 +60,7 @@ const PendingAdvocacy = () => {
   ); 
 
   const uniqueStatuses = [...new Set(advocacyData?.map(item => item.status))];
-  const filteredData = activeTab === 0 ? advocacyData : advocacyData?.filter(item => item.status === 'pending');
+  const filteredData = advocacyData?.filter(item => item.status === 'pending');
   
   return (
     <>

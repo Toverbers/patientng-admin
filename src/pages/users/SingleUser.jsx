@@ -32,6 +32,12 @@ const SingleUser = () => {
   getUser({id: id})
  },[])
 
+ useEffect(() => {
+  if(singleUserData){
+    setSelectedPermissions(singleUserData?.userType)
+  }
+ },[singleUserData])
+
  const handleActivateUser = async () => {
   await changeUserStatus({id: singleUserData?._id})
   getUser({id: id})
@@ -104,7 +110,7 @@ const SingleUser = () => {
       <div className="rounded-lg border p-3 mx-5 mb-5 bg-white">
       <h1 className="text-xl font-bold mb-4 text-gray-800">Permission List</h1>
               <div className="flex flex-row flex-wrap gap-x-6 gap-y-4 mb-6">
-              {permissions.map((permission, index) => (
+              {permissions?.map((permission, index) => (
                 <label
                   key={index}
                   className="flex items-center space-x-2 text-gray-700"
@@ -112,7 +118,7 @@ const SingleUser = () => {
                   <input
                     type="checkbox"
                     value={permission}
-                    checked={selectedPermissions.includes(permission)}
+                    checked={selectedPermissions?.includes(permission)}
                     onChange={() => handleCheckboxChange(permission)}
                     className="w-4 h-4 text-lime-500 focus:ring-lime-500"
                   />

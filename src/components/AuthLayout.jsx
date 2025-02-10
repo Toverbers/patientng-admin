@@ -17,7 +17,7 @@ const AuthLayout = ({
         <Link to="/">
         
           <div className="flex justify-center">
-            <img src="/logo.png" alt="logo" className='w-[60px] h-auto' />
+            <img src="/fav-logo.png" alt="logo" className='w-[60px] h-auto' />
           </div>
       
         </Link>
