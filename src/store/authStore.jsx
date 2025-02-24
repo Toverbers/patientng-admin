@@ -67,7 +67,7 @@ const useAuthStore = create((set) => ({
 		}
 	},
 
-  updateUserProfile: async ({id, firstName, lastName, email, phone, image, age, gender, address, state, lga}) => {
+  updateUserProfile: async ({id, firstName, lastName, email, phone, image, age, gender, address, state, lga, userType}) => {
 		set({ loading: true });
 		const config = {
 			headers: {

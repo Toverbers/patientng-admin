@@ -6,14 +6,64 @@ import UserInformation from './UserInformation'
 import UserAppointment from './UserAppointment'
 import { useParams } from 'react-router-dom'
 import { useUserStore } from '@/store/usersStore'
+import useAuthStore from '@/store/authStore'
 
-const SingleUser = () => {
- const {getUser, changeUserStatus, singleUserData} = useUserStore()
+const SingleUser = ({onClick}) => {
+ const {getUser, changeUserStatus, singleUserData, updateUser} = useUserStore()
+ const {updateUserProfile} = useAuthStore()
  const {id} = useParams()
  const [selectedPermissions, setSelectedPermissions] = useState([]);
 
+ const [formData, setFormData] = useState({
+  email: "", 
+  firstName: "", 
+  lastName: "", 
+  phone: "", 
+  age: "", 
+  state: "", 
+  address: "", 
+  lga: "", 
+  userType: "", 
+  image: ""
+})
 
- const permissions = ["admin", 'blogger', 'webinar', 'podcast', 'crowedfunding', 'advocacy', 'Website'];
+useEffect(() => {
+  if(singleUserData){
+    setFormData({
+      email: singleUserData?.email, 
+      firstName: singleUserData?.firstName, 
+      lastName: singleUserData?.lastName, 
+      phone: singleUserData?.phone, 
+      age: singleUserData?.age, 
+      state: singleUserData?.state, 
+      address: singleUserData?.address, 
+      lga: singleUserData?.lga, 
+      userType: singleUserData?.userType, 
+      image: singleUserData?.image
+    })
+    setSelectedPermissions(singleUserData?.userType)
+  }
+},[singleUserData])
+
+const handleUpdate = async () => {
+   await updateUserProfile({
+    id: singleUserData?._id, 
+    email: formData?.email, 
+    firstName: formData?.firstName, 
+    lastName: formData?.lastName, 
+    phone: formData?.phone, 
+    age: formData?.age, 
+    state: formData?.state, 
+    address: formData?.address, 
+    lga: formData?.lga, 
+    userType: selectedPermissions, 
+    //image: formData?.image
+  }) 
+  console.log("UPDATE BOTTON SUCCESS")
+}
+
+
+ const permissions = ["admin", "user", 'blogger', 'webinar', 'podcast', 'crowedfunding', 'advocacy', 'Website'];
 
  const handleCheckboxChange = (permission) => {
   setSelectedPermissions((prevSelected) => {
@@ -26,17 +76,17 @@ const SingleUser = () => {
   });
 };  
 
- console.log("USER ID", id)
+ //console.log("Selected permission", selectedPermissions)
 
  useEffect(() => {
   getUser({id: id})
  },[])
 
- useEffect(() => {
+ /* useEffect(() => {
   if(singleUserData){
     setSelectedPermissions(singleUserData?.userType)
   }
- },[singleUserData])
+ },[singleUserData]) */
 
  const handleActivateUser = async () => {
   await changeUserStatus({id: singleUserData?._id})
@@ -48,7 +98,7 @@ const SingleUser = () => {
 }
 
 
- console.log("SINGLE USER INFORMATION", singleUserData)
+ //console.log("SINGLE USER INFORMATION", singleUserData)
 
     const tabList = [
         {name: "User's Inormation"},
@@ -106,7 +156,7 @@ const SingleUser = () => {
         <TabsContent value="Appointment"><UserAppointment /></TabsContent>
         </Tabs> */}
 
-    {singleUserData?.isAdmin && (
+    
       <div className="rounded-lg border p-3 mx-5 mb-5 bg-white">
       <h1 className="text-xl font-bold mb-4 text-gray-800">Permission List</h1>
               <div className="flex flex-row flex-wrap gap-x-6 gap-y-4 mb-6">
@@ -127,9 +177,9 @@ const SingleUser = () => {
               ))}
             </div>
           </div>
-    )}
     
-      <UserInformation userData={singleUserData} />
+    
+      <UserInformation userData={formData} onClick={handleUpdate} setFormData={setFormData} />
       </div>
 
     </div>

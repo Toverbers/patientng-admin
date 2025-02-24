@@ -91,11 +91,11 @@ export const useUserStore = create((set, get) => ({
 	},
     
 
-    updateUser: async ({id, email, firstNAme, lastNAme, phone, age, state, address, lga, userType, image}) => {
+    updateUser: async ({id, email, firstName, lastName, phone, age, state, address, lga, userType, image}) => {
 		set({ loading: true });
 
 		try {
-			const res = await axiosInstance.put(`/update-user-profile/${id}`, {email, firstNAme, lastNAme, phone, age, state, address, lga, userType, image});
+			const res = await axiosInstance.put(`/update-user-profile/${id}`, {email, firstName, lastName, phone, age, state, address, lga, userType, image});
 			set({  loading: false });
 			console.log("update testimonial result",res.data.result)
 			toast.success(res.data.message);

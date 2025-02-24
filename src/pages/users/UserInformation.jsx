@@ -1,9 +1,21 @@
 import ButtonComponent from '@/components/ButtonComponent'
 import InputField from '@/components/InputField'
 import SelectInput from '@/components/SelectInput'
-import React from 'react'
+import { useUserStore } from '@/store/usersStore'
+import React, { useState } from 'react'
 
-const UserInformation = ({userData}) => {
+const UserInformation = ({userData, onClick, setFormData}) => {
+  const {updateUser} = useUserStore()
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target
+    setFormData(prevData => ({
+      ...prevData,
+      [id]: value
+    }))
+  }
+   
+
   return (
     <div className="grow overflow-y-auto">
       <div className="mx-5 border bg-white rounded-xl p-3 flex flex-col space-y-3">
@@ -12,20 +24,20 @@ const UserInformation = ({userData}) => {
         </p>
 
         <div className="space-x-3 flex items-center w-full">
-          <InputField title="First Name" placeholder="Abayomi" value={userData?.firstName} />
-          <InputField title="Last Name" placeholder="Olowu" value={userData?.lastName} />
+          <InputField title="First Name" placeholder="Abayomi" value={userData?.firstName} onChange={handleInputChange} />
+          <InputField title="Last Name" placeholder="Olowu" value={userData?.lastName} onChange={handleInputChange} />
         </div>
 
         <div className="space-x-3 flex items-center w-full">
-          <InputField title="Email Address" placeholder="abayomi@gmail.com" value={userData?.email} />
-          <InputField title="Phone Number" placeholder="0810 0000 000" value={userData?.phoneNumber} />
+          <InputField title="Email Address" placeholder="abayomi@gmail.com" value={userData?.email} onChange={handleInputChange} />
+          <InputField title="Phone Number" placeholder="0810 0000 000" value={userData?.phoneNumber} onChange={handleInputChange} />
         </div>
 
         <div className="space-x-3 flex items-center w-full">
-          <InputField title="Age" placeholder="12 years old" value={userData?.age} />
+          <InputField title="Age" placeholder="12 years old" value={userData?.age} onChange={handleInputChange} />
           <SelectInput
             label="Gender"
-            value={userData?.gender}
+            value={userData?.gender} onChange={handleInputChange}
             defaultValue={userData?.gender}
             options={[
               { value: "Male", label: "Male" },
@@ -35,7 +47,7 @@ const UserInformation = ({userData}) => {
         </div>
 
         <div className="space-x-3 flex items-center w-full">
-          <InputField title="Street Address" placeholder="234 ABC Screet" value={userData?.location} />
+          <InputField title="Street Address" placeholder="234 ABC Screet" value={userData?.location} onChange={handleInputChange} />
         </div>
 
         {/* <div className="space-x-3 flex items-center w-full">
@@ -56,7 +68,7 @@ const UserInformation = ({userData}) => {
           />
         </div> */}
 
-        {/* <ButtonComponent title="Save Changes" onClick={() => {}} /> */}
+         <ButtonComponent title="Save Changes" onClick={onClick} />
       </div>
     </div>
   )
