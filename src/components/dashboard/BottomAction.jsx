@@ -24,7 +24,7 @@ const BottomAction = ({data}) => {
     <div className="flex items-center justify-between px-5 my-3">
       <Link to="/profile">
       <div className="flex items-center space-x-3">
-        <img crossOrigin='anonymous' src={data?.image? `${import.meta.env.VITE_MAIN_URL}/${data?.image}` : '/assets/png/user.png'} alt="user" width={20} height={20} />
+        <img crossOrigin='anonymous' src={data?.image? `${import.meta.env.VITE_MAIN_URL}/${data?.image}` : '/assets/png/user.png'} alt="user" width={20} height={20} className="rounded-full" />
         <div>
           <p className="text-[#252525] text-[15px] font-bold">{data?.lastName}</p>
           <p className="text-[#68727D] text-[14px]">{data?.email}</p>

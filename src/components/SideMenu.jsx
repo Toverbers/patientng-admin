@@ -130,7 +130,7 @@ const SideMenu = () => {
           </li>
           {/* )} */}
         
-          {hasPermission(myData?.userType, ["admin", "user", ]) && (
+          {hasPermission(myData?.userType, ["admin", "users", ]) && (
         <li className="text-gray-500 hover:border hover:border-l-emerald-600 hover:border-l-2 hover:bg-[#FAFFFD] p-3 px-5">
             <Link to="/users" className="flex items-center space-x-2">
             <UserIcon className="w-4 h-4 md:w-5 md:h-5" strokeColor="#68727D"/>
@@ -219,7 +219,7 @@ const SideMenu = () => {
           
 
         
-        
+          {hasPermission(myData?.userType, ["admin", ]) && (
          <>
           <p className='px-5 text-base font-bold mt-5'>Admins</p>
         
@@ -233,6 +233,7 @@ const SideMenu = () => {
             </Link>
         </li>
          </>
+         )}
         
       </ul>
     </nav>

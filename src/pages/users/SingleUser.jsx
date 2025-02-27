@@ -56,14 +56,14 @@ const handleUpdate = async () => {
     state: formData?.state, 
     address: formData?.address, 
     lga: formData?.lga, 
-    userType: selectedPermissions, 
+    userType: JSON.stringify(selectedPermissions), 
     //image: formData?.image
   }) 
   console.log("UPDATE BOTTON SUCCESS")
 }
 
 
- const permissions = ["admin", "user", 'blogger', 'webinar', 'podcast', 'crowedfunding', 'advocacy', 'Website'];
+ const permissions = ["admin", "user", "users", 'blogger', 'webinar', 'podcast', 'crowedfunding', 'advocacy', 'Website'];
 
  const handleCheckboxChange = (permission) => {
   setSelectedPermissions((prevSelected) => {

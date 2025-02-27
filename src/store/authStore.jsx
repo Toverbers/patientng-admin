@@ -76,7 +76,7 @@ const useAuthStore = create((set) => ({
 	}
 
 		try {
-			const res = await axiosInstance.put(`/update-user-profile/${id}`, {age, gender, address, state, lga, firstName, lastName, email, phone, image,}, config);
+			const res = await axiosInstance.put(`/update-user-profile/${id}`, {age, gender, address, state, lga, firstName, lastName, email, phone, image, userType}, config);
 			set({  loading: false, onboardSuccess: true });
 			toast.success(res.data.message);
 			//toast.success("challenge updated successfully");
